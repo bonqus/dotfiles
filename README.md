@@ -1,2 +1,2 @@
-# dotfiles
+# About
 This repository contains configuration files I use on my Linux systems
