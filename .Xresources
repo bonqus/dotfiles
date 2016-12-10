@@ -47,6 +47,8 @@ XTerm*reverseVideo: on
 XTerm*faceName: xft:Source Code Pro:size=9
 XTerm*selectToClipboard: true
 
+! No bold
+URxvt.boldFont: xft:Source Code Pro:size=9
 URxvt.font: xft:Source Code Pro:size=9
 URxvt.depth: 32
 URxvt.background: #1d1f21

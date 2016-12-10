@@ -65,8 +65,8 @@ set! browser.enabel_automatic_image_resizing=false
 " the number of URL-completions is 20
 set! browser.urlbar.maxRichResults=20
 
-" the number of popups is 100
-set! dom.popup_maximum=100
+" the number of popups is 50
+set! dom.popup_maximum=50
 
 " activate spell-check textarea/input
 set! layout.spellcheckDefault=2

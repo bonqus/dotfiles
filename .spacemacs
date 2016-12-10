@@ -379,6 +379,7 @@ you should place your code here."
   ;; No tabs
   (setq tab-width 2)
   (setq-default indent-tabs-mode nil)
+
   (setq-default c-default-style "Linux"
                 c-basic-offset 2)
 
@@ -393,7 +394,7 @@ you should place your code here."
   ;; Key bindings non evil Set
   ;;  (global-set-key (kbd "C-:") 'iedit-mode)                  ;; Refactoring
   (global-set-key (kbd "C-*") 'evilnc-comment-or-uncomment-lines) ;; Comments
-  (global-set-key (kbd "C-SPC") 'er/expand-region)          ;; Smart select / expand region
+  ;; (global-set-key (kbd "C-SPC") 'er/expand-region)          ;; Smart select / expand region
   ;; Switch between windows i3 style
   ;; (global-set-key [M-left] 'windmove-left)
   ;; (global-set-key [M-right] 'windmove-right)
