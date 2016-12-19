@@ -53,8 +53,8 @@ bindsym $mod+z exec --no-startup-id morc_menu
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+# exec --no-startup-id volumeicon
+# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # exec --no-startup-id pulseaudio
 # exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
@@ -65,11 +65,16 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
+bindsym XF86AudioRaiseVolume exec "pulseaudio-ctl up"
+bindsym XF86AudioLowerVolume exec "pulseaudio-ctl down"
+bindsym XF86AudioMute exec "pulseaudio-ctl mute"
+
+
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec palemoon
-bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
+bindsym $mod+F2 exec firefox 
+# bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec terminal -e 'ranger'
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
@@ -109,7 +114,7 @@ bindsym $mod+Shift+Right move right
 
 # workspace back and forth (with/without active container)
 # workspace_auto_back_and_forth yes
-bindsym $mod+b workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
@@ -187,7 +192,7 @@ bindsym $mod+Shift+7 move container to workspace number 7; workspace 7
 bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] 1
+assign [class="firefox"] 1
 # assign [class="Pale moon"] 2
 # assign [class="Pcmanfm"] 3
 # assign [class="Skype"] 5
@@ -220,7 +225,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 # for_window [class="Uzbl-core"] focus child, layout stacking, focus # stacked for full titles display
-for_window [class="Uzbl-core"] focus child, layout tabbed, focus
+# for_window [class="Uzbl-core"] focus child, layout tabbed, focus
 # for_window [class="Wine" instance="Battle.net.exe" title="Battle.net"] floating enable border none
 for_window [title="Battle.net"] floating enable border none
 for_window [title="gvim"] floating enable border pixel 1
@@ -285,7 +290,7 @@ bindsym $mod+9 exec --no-startup-id i3lock-fancy
 #exec --no-startup-id /usr/bin/adjust_i3statusconf
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 # exec --no-startup-id clipit
@@ -300,9 +305,8 @@ exec --no-startup-id start_conky_grey
 # exec --no-startup-id start_conky_live_maia
 # exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker i3lock-fancy
-exec --no-startup-id xinput set-prop "bcm5974" "libinput Tapping Enabled" 1
-# Bind caps to escape
-exec setxkbmap -option caps:escape
+exec --no-startup-id xinput set-prop "bcm5974" "libinput Tapping Enabled" 1 #Mouse gestures
+exec setxkbmap -option caps:escape # Bind caps to escape
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
