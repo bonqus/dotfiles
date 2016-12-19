@@ -53,6 +53,7 @@ values."
      html
      ipython-notebook
      java
+     javascript
      latex
      markdown
      org
@@ -338,18 +339,22 @@ you should place your code here."
   (delete-selection-mode t)           ;; Delete marked region if any key preessed
   (transient-mark-mode t)             ;; Standard selection-highlighting behavior
   (setq select-enable-clipboard t)    ;; Copy paste to and from emacs
-  
+
+
+
   ;; Scrolling
-  ;; (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))     ;; One line at a time
-  ;; (setq mouse-wheel-progressive-speed nil)                ;; Don't accelerate scrolling
-  ;; (setq mouse-wheel-follow-mouse 't)                      ;; Scroll window under mouse    
-  ;; (setq scroll-step 1)                                    ;; Keyboard scroll one line at a time
-  ;; (global-set-key (kbd "<prior>") 'scroll-down-line)      ;; PgUp - scroll one line instead
-  ;; (global-set-key (kbd "<next>") 'scroll-up-line)         ;; PgDn - scroll one line instead
-  ;; (global-set-key (kbd "<C-prior>") 'scroll-down-command) ;; PgDn
-  ;; (global-set-key (kbd "<C-next>") 'scroll-up-command)    ;; PgUp
-  ;; (setq auto-window-vscroll nil)                          ;; Enough with the crazy jumps
-  ;; (setq scroll-conservatively 10000)                      ;; Super slow and smooth
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))     ;; One line at a time
+  (setq mouse-wheel-progressive-speed nil)                ;; Don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't)                      ;; Scroll window under mouse
+  (setq scroll-step 1)                                    ;; Keyboard scroll one line at a time
+  (global-set-key (kbd "<prior>") 'scroll-down-line)      ;; PgUp - scroll one line instead
+  (global-set-key (kbd "<next>") 'scroll-up-line)         ;; PgDn - scroll one line instead
+  (global-set-key (kbd "<C-prior>") 'scroll-down-command) ;; PgDn
+  (global-set-key (kbd "<C-next>") 'scroll-up-command)    ;; PgUp
+  (setq auto-window-vscroll nil)                          ;; Enough with the crazy jumps
+  (setq scroll-conservatively 10000)                      ;; Super slow and smooth
+
+
   ;; Templates - auto insert mode
   (auto-insert-mode)
   (setq-default auto-insert-directory "~/.templates_emacs")
@@ -358,11 +363,14 @@ you should place your code here."
   (define-auto-insert "\\.tex$" "temp.tex")
   (define-auto-insert "\\.fsx$" "temp.fsx")
   (define-auto-insert "\\.c$" "temp.c")
+
+  ;; Evil mode changes
+  ;; (setq evil-move-cursor-back nil)  ;; Dont move one char back when leaving insert
   (setq-default evil-cross-lines t) ;; cursor movement doesnt lock on end line
 
   ;; Emacs BEHAVE!
   ;; Just y/n thank you
-  (defalias 'yes-or-no-p 'y-or-n-p) 
+  (defalias 'yes-or-no-p 'y-or-n-p)
   ;; Decrease wait time on keystrokes and dont pop up dialogs
   (setq echo-keystrokes 0.1
         use-dialog-box nil)
@@ -432,4 +440,4 @@ you should place your code here."
  '(helm-external-programs-associations (quote (("pdf" . "zathura"))))
  '(package-selected-packages
    (quote
-    (x86-lookup nasm-mode helm-cscope xcscope systemd pdf-tools tablist insert-shebang fish-mode company-shell csv-mode erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks powerline spinner hydra request org d-mode auctex highlight company projectile git-commit with-editor dash elm-mode fsharp-mode company-quickhelp web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data vimrc-mode dactyl-mode ein websocket pony-mode pcache flyspell-correct auto-complete anaconda-mode iedit git-gutter helm-bibtex async ivy smartparens yasnippet helm helm-core magit flyspell-popup pos-tip flycheck company-emacs-eclim eclim evil-commentary spray ranger evil-snipe rainbow-mode rainbow-identifiers color-identifiers-mode zonokai-theme zenburn-theme zen-and-art-theme yapfify xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme spacemacs-theme spaceline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme reverse-theme restart-emacs rainbow-delimiters railscasts-theme quelpa pyvenv pytest pyenv-mode py-isort purple-haze-theme professional-theme popwin planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el pastels-on-dark-theme paradox orgit organic-green-theme org-ref org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme neotree naquadah-theme mwim mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow macrostep lush-theme lorem-ipsum live-py-mode linum-relative link-hint light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md gandalf-theme flyspell-correct-helm flycheck-pos-tip flx-ido flatui-theme flatland-theme firebelly-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump dracula-theme django-theme disaster diff-hl define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme company-statistics company-c-headers company-auctex company-anaconda column-enforce-mode colorsarenice-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmake-mode clues-theme clean-aindent-mode clang-format cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode x86-lookup nasm-mode helm-cscope xcscope systemd pdf-tools tablist insert-shebang fish-mode company-shell csv-mode erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks powerline spinner hydra request org d-mode auctex highlight company projectile git-commit with-editor dash elm-mode fsharp-mode company-quickhelp web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data vimrc-mode dactyl-mode ein websocket pony-mode pcache flyspell-correct auto-complete anaconda-mode iedit git-gutter helm-bibtex async ivy smartparens yasnippet helm helm-core magit flyspell-popup pos-tip flycheck company-emacs-eclim eclim evil-commentary spray ranger evil-snipe rainbow-mode rainbow-identifiers color-identifiers-mode zonokai-theme zenburn-theme zen-and-art-theme yapfify xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme spacemacs-theme spaceline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme reverse-theme restart-emacs rainbow-delimiters railscasts-theme quelpa pyvenv pytest pyenv-mode py-isort purple-haze-theme professional-theme popwin planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el pastels-on-dark-theme paradox orgit organic-green-theme org-ref org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme neotree naquadah-theme mwim mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow macrostep lush-theme lorem-ipsum live-py-mode linum-relative link-hint light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md gandalf-theme flyspell-correct-helm flycheck-pos-tip flx-ido flatui-theme flatland-theme firebelly-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump dracula-theme django-theme disaster diff-hl define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme company-statistics company-c-headers company-auctex company-anaconda column-enforce-mode colorsarenice-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmake-mode clues-theme clean-aindent-mode clang-format cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
