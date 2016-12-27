@@ -37,14 +37,13 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      asm
-     better-defaults
      bibtex
      colors
-     cscope
      csv
      d
      django
      erc
+     evil-cleverparens
      elm
      emacs-lisp
      fsharp
@@ -59,14 +58,19 @@ values."
      org
      pdf-tools
      python
+     semantic
      shell-scripts
      speed-reading
+     syntax-checking
      systemd
      themes-megapack
      vimscript
+     version-control
 
      (auto-completion  :variables
-                       auto-completion-enable-snippets-in-popup t)
+                       auto-completion-enable-snippets-in-popup t
+                       auto-completion-enable-sort-by-usage t
+                       auto-completion-enable-help-tooltip t)
 
      (c-c++ :variables
             c-c++-enable-clang-support t)
@@ -76,7 +80,7 @@ values."
             shell-default-position 'bottom)
 
      (spell-checking :variables
-                     auto-dictionary-mode t
+                     spell-checking-enable-auto-dictionary t
                      enable-flyspell-auto-completion t
                      spell-checking-enable-by-default nil)
 
@@ -368,6 +372,10 @@ you should place your code here."
   ;; (setq evil-move-cursor-back nil)  ;; Dont move one char back when leaving insert
   (setq-default evil-cross-lines t) ;; cursor movement doesnt lock on end line
 
+  ;; Auctex titles fonts
+  (setq font-latex-fontify-sectioning 'color)
+  (setq font-latex-fontify-sectioning 1.0)
+
   ;; Emacs BEHAVE!
   ;; Just y/n thank you
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -416,28 +424,18 @@ you should place your code here."
   (global-set-key (kbd "C-c k") 'outline-hide-body)
   (global-set-key (kbd "C-c j") 'outline-show-all)
 
+  ;; properly enable/disable cleverparens
+  (add-hook 'smartparens-enabled-hook #'spacemacs/toggle-evil-cleverparens-on)
+  (add-hook 'smartparens-disabled-hook #'spacemacs/toggle-evil-cleverparens-off)
+  ;; cleverparens works better with these settings
+  (setq evil-move-cursor-back nil
+        evil-move-beyond-eol t)
+
   ;; (setq helm-external-programs-associations (quote (("mp4" . "vlc") ("pdf" . "zathura"))))
   (switch-to-buffer "*scratch*")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("8288b9b453cdd2398339a9fd0cec94105bc5ca79b86695bd7bf0381b1fbe8147" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "b34636117b62837b3c0c149260dfebe12c5dad3d1177a758bb41c4b15259ed7e" "80ceeb45ccb797fe510980900eda334c777f05ee3181cb7e19cd6bb6fc7fda7c" "4e753673a37c71b07e3026be75dc6af3efbac5ce335f3707b7d6a110ecb636a3" "f04122bbc305a202967fa1838e20ff741455307c2ae80a26035fbf5d637e325f" "3632cf223c62cb7da121be0ed641a2243f7ec0130178722554e613c9ab3131de" "66132890ee1f884b4f8e901f0c61c5ed078809626a547dbefbb201f900d03fd8" "0c29db826418061b40564e3351194a3d4a125d182c6ee5178c237a7364f0ff12" "a800120841da457aa2f86b98fb9fd8df8ba682cebde033d7dbf8077c1b7d677a" default)))
- '(evil-want-Y-yank-to-eol nil)
- '(helm-external-programs-associations (quote (("pdf" . "zathura"))))
- '(package-selected-packages
-   (quote
-    (web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode x86-lookup nasm-mode helm-cscope xcscope systemd pdf-tools tablist insert-shebang fish-mode company-shell csv-mode erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks powerline spinner hydra request org d-mode auctex highlight company projectile git-commit with-editor dash elm-mode fsharp-mode company-quickhelp web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data vimrc-mode dactyl-mode ein websocket pony-mode pcache flyspell-correct auto-complete anaconda-mode iedit git-gutter helm-bibtex async ivy smartparens yasnippet helm helm-core magit flyspell-popup pos-tip flycheck company-emacs-eclim eclim evil-commentary spray ranger evil-snipe rainbow-mode rainbow-identifiers color-identifiers-mode zonokai-theme zenburn-theme zen-and-art-theme yapfify xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme spacemacs-theme spaceline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme reverse-theme restart-emacs rainbow-delimiters railscasts-theme quelpa pyvenv pytest pyenv-mode py-isort purple-haze-theme professional-theme popwin planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el pastels-on-dark-theme paradox orgit organic-green-theme org-ref org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme neotree naquadah-theme mwim mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow macrostep lush-theme lorem-ipsum live-py-mode linum-relative link-hint light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md gandalf-theme flyspell-correct-helm flycheck-pos-tip flx-ido flatui-theme flatland-theme firebelly-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump dracula-theme django-theme disaster diff-hl define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme company-statistics company-c-headers company-auctex company-anaconda column-enforce-mode colorsarenice-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmake-mode clues-theme clean-aindent-mode clang-format cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+
+
