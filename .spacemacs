@@ -358,6 +358,8 @@ you should place your code here."
   (setq auto-window-vscroll nil)                          ;; Enough with the crazy jumps
   (setq scroll-conservatively 10000)                      ;; Super slow and smooth
 
+  ;; Scroll when cursor is n-lines from top or bottom
+  (setq scroll-margin 6)
 
   ;; Templates - auto insert mode
   (auto-insert-mode)
