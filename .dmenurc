@@ -3,19 +3,19 @@
 #
 
 ## define the hight of dmenu
-DM_H="-h 20"
+DM_H="-h 22"
 
 ## define the font for dmenu to be used
 DM_FN="-fn 'Cantarell-9'"
 
 ## background colour for unselected menu-items
-DM_NB="-nb #1d1f21"
+DM_NB="-nb #282a2e"
 
 ## textcolour for unselected menu-items
 DM_NF="-nf #FDF6E3"
 
 ## background colour for selected menu-items
-DM_SB="-sb #282a2e"
+DM_SB="-sb #1d1f21"
 
 ## textcolour for selected menu-items
 DM_SF="-sf #FDF6E3"
@@ -24,19 +24,19 @@ DM_SF="-sf #FDF6E3"
 TERMINAL_CMD="terminal -e"
 
 ## place dmenu at bottom of the screen
-DM_B="-b"
+DM_B=""
 
 ## faster dmenu but locks X
 DM_F="-f"
 
 ## width
-DM_W="-w 440"
+DM_W=""
 
 ## xoffset
-DM_X="-x 420"
+DM_X="-x 0"
 
 ## yoffset
-DM_Y="-y 1"
+DM_Y="-y 0"
 
 ## export our variables
 DMENU_OPTIONS="$DM_FN $DM_NB $DM_NF $DM_SF $DM_SB $DM_H $DM_B $DM_F $DM_W $DM_X $DM_Y"
