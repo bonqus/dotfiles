@@ -1,6 +1,6 @@
 *background: #1D1F21
 *foreground: #C5C8C6
-! *cursorColor: #eead0e
+*cursorColor: #eead0e
 
 ! black
 *color0: #282A2E
@@ -12,7 +12,6 @@
 *color2: #8C9440
 *color10: #B5BD68
 ! yellow
-
 *color3: #DE935F
 *color11: #F0C674
 ! blue
@@ -48,6 +47,7 @@ XTerm*faceName: xft:Source Code Pro:size=9
 XTerm*selectToClipboard: true
 
 ! No bold
+URxvt.letterSpace: -2
 URxvt.boldFont: xft:Source Code Pro:size=9
 URxvt.font: xft:Source Code Pro:size=9
 URxvt.depth: 32
@@ -60,10 +60,9 @@ URxvt*foreground:                     grey
 URxvt*saveLines:                      5000
 
 URxvt.perl-ext-common: default,matcher
-URxvt*urlLauncher: uzbl
 URxvt.colorUL: #86a2be
 
-URxvt*url-launcher: firefox 
+URxvt*url-launcher: luakit
 
 ! do not scroll with output
 URxvt*scrollTtyOutput: false
