@@ -10,6 +10,9 @@ set $mod Mod4
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 # new_window pixel 1
 for_window [class=".*"] border pixel 1 # force border on all windows
+# floating_minimum_size 700 x 400
+# floating_maximum_size -1 x -1 
+
 new_float normal
 
 # Hide borders
@@ -22,17 +25,10 @@ bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Cantarell, 10
+font pango:Cantarell, 9 
+# font pango:Source Code Pro, 8
+# font xft:Source Code Pro:size, 9
 
-# Colors #6a694d 
-set $base00 #FDF6E3
-set $base01 #d0d6dc
-set $base02 #1d1f21
-set $base03 #444e53
-set $base04 #eead0e
-set $base05 #879063
-set $base06 #E5201D
-set $base07 #282a2e
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -193,9 +189,11 @@ bindsym $mod+Shift+7 move container to workspace number 7; workspace 7
 bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
 
 # Open applications on specific workspaces
-assign [class="firefox"] 1
-# assign [class="Pale moon"] 2
-# assign [class="Pcmanfm"] 3
+assign [class="Luakit"] 1
+assign [class="emacs"] 2
+assign [class="Emacs"] 2
+assign [class="Emacsclient"] 2
+# assign [class="URxvt"] 3
 # assign [class="Skype"] 5
 
 # Open specific applications in floating mode
@@ -230,6 +228,7 @@ for_window [class="Xfburn"] floating enable
 # for_window [class="Wine" instance="Battle.net.exe" title="Battle.net"] floating enable border none
 for_window [title="Battle.net"] floating enable border none
 for_window [title="gvim"] floating enable border pixel 1
+# for_window [class="URxvt"] floating enable border pixel 1
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
@@ -295,7 +294,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 # exec --no-startup-id clipit
-exec --no-startup-id redshift-gtk
+# exec --no-startup-id redshift-gtk
 # exec --no-startup-id blueman
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_live_maia
@@ -312,28 +311,40 @@ exec setxkbmap -option caps:escape # Bind caps to escape
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	status_command i3status
+  status_command i3statuswrapper.sh
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-#	position top
-	bindsym button4 nop
-	bindsym button5 nop
-	font pango:Cantarell, 9
+# tray_output primary
+# tray_output eDP1
+# position top
+  bindsym button4 nop
+  bindsym button5 nop
+  font pango:Cantarell, 8
+  # font xft:Source Code Pro, 9
 
-	colors {
-#	background $transparent
-		background $base02
-                statusline $base00
-		separator  $base00
+
+# Colors#
+set $base00 #FFFFEF
+set $base01 #d0d6dc
+set $base02 #202020
+set $base03 #313131
+set $base04 #FFFFEF
+set $base05 #8CAC8C 
+set $base06 #E5201D
+set $base07 #3E3E3E
+    
+  colors {
+# background $transparent
+    background $base02
+    statusline $base00
+    separator  $base00
 
 #                       border  backgr. text
-		focused_workspace  $base04 $base04 $base02
-		active_workspace   $base02 $base02 $base00
-		inactive_workspace $base02 $base02 $base00
-		urgent_workspace   $base02 $base02 $base00
-	}
+    focused_workspace  $base04 $base04 $base02
+    active_workspace   $base02 $base02 $base05
+    inactive_workspace $base02 $base02 $base05
+    urgent_workspace   $base02 $base02 $base05
+  }
 }
 
 # hide/unhide i3status bar
@@ -341,13 +352,15 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                 border  backgr. text    indic.  child_border
-client.focused          $base04 $base04 $base02 $base00
-client.focused_inactive $base02 $base02 $base00 $base00
-client.unfocused        $base02 $base02 $base00 $base02
+client.focused          $base05 $base05 $base02 $base00
+client.focused_inactive $base03 $base03 $base00 $base00
+client.unfocused        $base03 $base03 $base00 $base02
 client.urgent           $base06 $base06 $base00 $base02
 client.placeholder      $base06 $base06 $base00 $base02 $base02
 
 client.background       $base04
+
+
 
 #############################
 ### settings for i3-gaps: ###
@@ -355,7 +368,7 @@ client.background       $base04
 
 # Set inner/outer gaps
 gaps inner 10
-gaps outer -4
+gaps outer -5
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

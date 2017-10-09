@@ -1,80 +1,87 @@
-*background: #1D1F21
-*foreground: #C5C8C6
-*cursorColor: #eead0e
-
-! black
-*color0: #282A2E
-*color8: #373B41
-! red
-*color1: #A54242
-*color9: #CC6666
-! green
-*color2: #8C9440
-*color10: #B5BD68
-! yellow
-*color3: #DE935F
-*color11: #F0C674
-! blue
-*color4: #5F819D
-*color12: #81A2BE
-! magenta
-*color5: #85678F
-*color13: #B294BB
-! cyan
-*color6: #5E8D87
-*color14: #8ABEB7
-! white
-*color7: #707880
-*color15: #C5C8C6
-
-! *pointerColorBackground:#1d1f21
-! *pointerColorForeground:#6a694d
-
-Xft.dpi: 96
+Xft.dpi: 112 
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
+
+! GOD background
+URxvt*background:     #313131
+
+! GOD @
+URxvt*foreground:     #DCDCCC 
+
+! GOD Cursor
+URxvt*cursorColor:    #FFFFEF
+
+! GOD alt der er underlined
+URxvt*colorUL:        #DCDCCC
+
+! GOD underline farven 
+URxvt*underlineColor: #DCDCCC
+
+
+URxvt*color0:  #202020
+! GOD gæt hvad jeg skriver
+URxvt*color8:  #DCDCCC
+
+! GOD >>
+URxvt*color1:  #B98080
+URxvt*color9:  #CC9090
+
+! GOD bonqus
+URxvt*color2:  #8CAC8C
+URxvt*color10: #bfebbf
+
+! GOD master
+URxvt*color3:  #ECBC9C
+URxvt*color11: #f0dfaf
+
+URxvt*color4:  #6ca0a3
+! GOD mapper
+URxvt*color12: #89C5C8
+
+! GOD ~/.dotfiles
+URxvt*color5:  #E090C7
+
+URxvt*color13: #dc8cc3
+
+! GOD macman
+URxvt*color6:  #A0EDF0
+URxvt*color14: #93e0e3
+
+ 
+URxvt*color7:  #DCDCCC
+URxvt*color15: #FFFFEF
+
+URxvt.letterSpace:          0
+URxvt.boldFont:             xft:Source Code Pro:size=8
+URxvt.font:                 xft:Source Code Pro:size=8
+URxvt.perl-ext-common:      default,matcher
+
+URxvt*xftAntialias:         true
+URxvt*scrollBar:            false
+URxvt*mouseWheelScrollPage: false
+URxvt*cursorBlink:          false
+URxvt*saveLines:            5000
+
+URxvt*scrollTtyKeypress:    true
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*url-launcher:         Luakit
+
+URxvt*internalBorder:       2
+
+
+
+
+
 Xcursor.theme: Paper
 Xcursor.size:  0
 
-XTerm*background: #1d1f21
-XTerm*foreground: #FDF6E3
-XTerm*reverseVideo: on
-XTerm*faceName: xft:Source Code Pro:size=9
-XTerm*selectToClipboard: true
 
-! No bold
-URxvt.letterSpace: -2
-URxvt.boldFont: xft:Source Code Pro:size=9
-URxvt.font: xft:Source Code Pro:size=9
-URxvt.depth: 32
-URxvt.background: #1d1f21
-URxvt*scrollBar:                      false
-URxvt*mouseWheelScrollPage:           false
-URxvt*cursorBlink:                    true
-URxvt*background:                     black
-URxvt*foreground:                     grey
-URxvt*saveLines:                      5000
-
-URxvt.perl-ext-common: default,matcher
-URxvt.colorUL: #86a2be
-
-URxvt*url-launcher: luakit
-
-! do not scroll with output
-URxvt*scrollTtyOutput: false
-
-! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollWithBuffer: true
-
-! scroll back to the bottom on keypress
-URxvt*scrollTtyKeypress: true
-
-
-! for 'fake' transparency (without Compton) uncomment the following three lines
+! ! for 'fake' transparency (without Compton) uncomment the following three lines
 ! URxvt*inheritPixmap:                  true
 ! URxvt*transparent:                    true
 ! URxvt*shading:                        138

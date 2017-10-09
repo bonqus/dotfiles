@@ -6,19 +6,19 @@
 DM_H="-h 22"
 
 ## define the font for dmenu to be used
-DM_FN="-fn 'Cantarell-9'"
+DM_FN="-fn 'Cantarell-8'"
 
 ## background colour for unselected menu-items
-DM_NB="-nb #282a2e"
+DM_NB="-nb #303030"
 
 ## textcolour for unselected menu-items
-DM_NF="-nf #FDF6E3"
+DM_NF="-nf #FFFFEF"
 
 ## background colour for selected menu-items
-DM_SB="-sb #1d1f21"
+DM_SB="-sb #FFFFEF"
 
 ## textcolour for selected menu-items
-DM_SF="-sf #FDF6E3"
+DM_SF="-sf #303030"
 
 ## command for the terminal application to be used:
 TERMINAL_CMD="terminal -e"
