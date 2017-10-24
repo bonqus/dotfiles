@@ -25,7 +25,10 @@ bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Cantarell, 9 
+# font pango:Cantarell, 9 
+
+font pango:Bitstream Vera Sans, 7.5
+
 # font pango:Source Code Pro, 8
 # font xft:Source Code Pro:size, 9
 
@@ -190,9 +193,9 @@ bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
 
 # Open applications on specific workspaces
 assign [class="Luakit"] 1
-assign [class="emacs"] 2
-assign [class="Emacs"] 2
-assign [class="Emacsclient"] 2
+# assign [class="emacs"] 2
+# assign [class="Emacs"] 2
+# assign [class="Emacsclient"] 2
 # assign [class="URxvt"] 3
 # assign [class="Skype"] 5
 
@@ -223,6 +226,10 @@ for_window [class="Thus"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+
+# Monte Carlo Localization
+for_window [title="Robot view"] floating enable
+for_window [title="World view"] floating enable
 # for_window [class="Uzbl-core"] focus child, layout stacking, focus # stacked for full titles display
 # for_window [class="Uzbl-core"] focus child, layout tabbed, focus
 # for_window [class="Wine" instance="Battle.net.exe" title="Battle.net"] floating enable border none
@@ -311,7 +318,8 @@ exec setxkbmap -option caps:escape # Bind caps to escape
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-  status_command i3statuswrapper.sh
+  # status_command i3statuswrapper.sh
+  status_command i3status
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 # tray_output primary
@@ -319,7 +327,8 @@ bar {
 # position top
   bindsym button4 nop
   bindsym button5 nop
-  font pango:Cantarell, 8
+  # font pango:Cantarell, 8
+  font pango:Bitstream Vera Sans, 7.5
   # font xft:Source Code Pro, 9
 
 
@@ -332,6 +341,7 @@ set $base04 #FFFFEF
 set $base05 #8CAC8C 
 set $base06 #E5201D
 set $base07 #3E3E3E
+set $base08 #89C5C8
     
   colors {
 # background $transparent
@@ -352,11 +362,11 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                 border  backgr. text    indic.  child_border
-client.focused          $base05 $base05 $base02 $base00
-client.focused_inactive $base03 $base03 $base00 $base00
-client.unfocused        $base03 $base03 $base00 $base02
-client.urgent           $base06 $base06 $base00 $base02
-client.placeholder      $base06 $base06 $base00 $base02 $base02
+client.focused          $base08 $base08 $base02 $base00
+client.focused_inactive $base02 $base02 $base08 $base00
+client.unfocused        $base02 $base02 $base08 $base02
+client.urgent           $base06 $base06 $base08 $base02
+client.placeholder      $base06 $base06 $base08 $base02 $base02
 
 client.background       $base04
 
