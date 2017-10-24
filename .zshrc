@@ -49,7 +49,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages colorize archlinux dirhistory pip repo chucknorris)
+plugins=(git colored-man-pages colorize archlinux dirhistory pip repo chucknorris vi-mode)
 # User configuration
 
 
@@ -114,5 +114,55 @@ alias chuckinanimal="chuck -a | fmt -80 -s | $(shuf -n 1 -e cowsay cowthink) -$(
 # }
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+bindkey '^f' vi-forward-blank-word
+
+zmodload zsh/terminfo
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^K' history-substring-search-up
+bindkey '^J' history-substring-search-down
+
+# bind UP and DOWN arrow keys (compatibility fallback
+# for Ubuntu 12.04, Fedora 21, and MacOSX 10.9 users)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# # bind P and N for EMACS mode
+# bindkey -M emacs '^P' history-substring-search-up
+# bindkey -M emacs '^N' history-substring-search-down
+
+
+function zle-line-init zle-keymap-select {
+    # insert/normal mode tag
+    VIM_PROMPT1="%{$fg_bold[blue]%} [% NORMAL]%  %{$reset_color%}"
+    VIM_PROMPT2="%{$fg_bold[yellow]%} [% INSERT]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT1}/(main|viins)/$VIM_PROMPT2} $EPS1"
+
+    # Super cool cursor change
+    if [ $KEYMAP = vicmd ]; then
+        # the command mode for vi
+        # echo -ne "\e[2 q"
+        print -n -- "\033[2 q"
+    else
+        # the insert mode for vi
+        print -n -- "\033[6 q"
+        # echo -ne "\e[4 q"
+    fi
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
+
