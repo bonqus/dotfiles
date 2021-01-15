@@ -275,4 +275,4 @@ rofi.kb-custom-19:                   Alt+Shift+9
 ! "Accept hovered row with custom action" Set from: Default
 ! rofi.me-accept-custom:               Control+MouseDPrimary
 
-rofi.theme:                          .config/rofi/themes/zenburn
+rofi.theme:                          .config/rofi/themes/nord

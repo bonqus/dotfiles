@@ -1,2 +1,2 @@
-# About
-This repository contains configuration files I use on my GNU/Linux systems
+<h1 align="center">My dotfiles from ~/.config & ~/</h1>
+

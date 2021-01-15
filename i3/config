@@ -170,7 +170,7 @@ set $ws3 3: 3 
 set $ws4 4: 4  
 set $ws5 5: 5  
 set $ws6 6: 6  
-set $ws7 7: 7  
+set $ws7 7: 7  
 set $ws8 8: 8  
 # 
 
@@ -256,6 +256,7 @@ for_window [urgent=latest] focus
 for_window [class="Luakit"] move container to workspace $ws1
 for_window [class="firefox"] move container to workspace $ws1
 for_window [class="Emacs"] move container to workspace $ws2
+for_window [class="Slack"] move container to workspace $ws7
 for_window [class="Spotify"] move container to workspace $ws8
 
 # reload the configuration file
@@ -389,7 +390,9 @@ set $nord15 #B48EAD
 bar {
 	i3bar_command i3bar
 	status_command i3status
+	# status_command i3blocks
 	position bottom
+    tray_output primary
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary

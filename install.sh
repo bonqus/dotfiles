@@ -69,11 +69,7 @@ install_dotfiles() {
         env ln -fs "$dotfiles_repo_dir/${dots_xdg_conf}" "$HOME/.config/${dots_xdg_conf[*]//./}"
     done
 
-    echo -e "${blue}New dotfiles is installed!\n${white}" >&2
-    echo "There may be some errors when Terminal is restarted." >&2
-    echo "Please read carefully the error messages and make sure all packages are installed. See more info in README.md." >&2
-    echo "Note that the author of this dotfiles uses dev branch in some packages." >&2
-    echo -e "If you want to restore your old config, you can use ${red}./install.sh -r${white} command." >&2
+    echo -e "${blue}New dotfiles installed!\n${white}" >&2
 }
 
 uninstall_dotfiles() {
