@@ -1,6 +1,7 @@
 local modes = require "modes"
 local luakit = require "luakit"
 local editor = require "editor"
+local settings = require "settings"
 -- set urxvt as terminal for editor --
 editor.editor_cmd = "urxvt -e vim {file} +{line}"
 
@@ -12,6 +13,8 @@ modes.add_binds("normal", {
                   { "<Alt-h>", "Go to previous tab.", function (w) w:prev_tab() end },
                   { "<Alt-l>", "Go to next tab.", function (w) w:next_tab() end },
 })
+
+settings.window.default_search_engine = "duckduckgo"
 
 -- End Own Bindings --
 

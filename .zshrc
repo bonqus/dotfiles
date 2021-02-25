@@ -67,6 +67,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
   git # a bunch of aliases: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
   git-prompt
+  gitfast
   # gitignore # gitignorre templates: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/gitignore
   github # autocompletion for hub : https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/github
   colored-man-pages # adds colors to manpages: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
@@ -89,7 +90,7 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
+# source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 
 # python virtenvs
 export WORKON_HOME=$HOME/.virtualenvs

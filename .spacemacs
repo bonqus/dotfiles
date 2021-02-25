@@ -1,6 +1,4 @@
-;; -*- mode: emacs-lisp; lexical-binding: t -*-
-;; This file is loaded by Spacemacs at startup.
-;; It must be stored in your home directory.
+;; -*- mode: emacs-lisp -*-
 
 (defun dotspacemacs/layers ()
   "Layer configuration:
@@ -34,7 +32,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(
      haskell
-     php
      yaml
      asm
      bibtex
@@ -44,25 +41,27 @@ This function should only modify configuration layer settings."
      dap
      django
      emacs-lisp
-     erc
+     ;; erc
      ;; evil-cleverparens
      git
      helm
      html
-     imenu-list
+     imenu-list ;; Outline
      java
+     slack
      (javascript :variables
-                 node-add-modules-path t
-                 javascript-backend 'lsp
-                 javascript-fmt-tool 'prettier)
+                 javascript-backend 'tide
+                 javascript-fmt-tool 'prettier
+                 node-add-modules-path t)
      lua
      (lsp :variables
           lsp-ui-flycheck-enable nil)
      markdown
      multiple-cursors
-     (org :variables
-          org-enable-github-support t
-          org-enable-reveal-js-support t)
+     org
+     ;; (org :variables
+     ;;     org-enable-github-support t
+     ;;     org-enable-reveal-js-support t)
      (python :variables
              python-indent-offset 4
              python-tab-width 4
@@ -77,16 +76,22 @@ This function should only modify configuration layer settings."
      shell-scripts
      syntax-checking
      systemd
+     react
      (typescript :variables
-                 typescript-backend 'lsp)
-     themes-megapack
+                 typescript-backend 'lsp
+                 typescript-lsp-linter nil
+                 typescript-linter 'eslint)
+     ;; themes-megapack
      version-control
      vimscript
-     (vue :variables vue-backend 'lsp)
      (node :variable node-add-modules-path)
      (latex :variables
             latex-enable-auto-fill nil ;; Don't auto break lines
-            latex-enable-folding t)
+            latex-backend 'lsp
+            latex-refresh-preview t
+            latex-enable-folding t
+            ;; latex-enable-magic t
+            )
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -121,16 +126,24 @@ This function should only modify configuration layer settings."
    '(
      yasnippet-snippets
      py-autopep8
-     evil-vimish-fold
+     ;; evil-vimish-fold
      openwith
      sphinx-doc
      nord-theme
+     rjsx-mode
+     all-the-icons
+     latex-extra
+     company-tabnine
+     ts-comint
+     prettier-js
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(
+     company-tern
+    )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -191,7 +204,7 @@ It should only modify the values of Spacemacs settings."
    ;; Setting this >= 1 MB should increase performance for lsp servers
    ;; in emacs 27.
    ;; (default (* 1024 1024))
-   dotspacemacs-read-process-output-max (* 1024 1024)
+   dotspacemacs-read-process-output-max (* 2048 2048)
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -274,9 +287,9 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(nord
-                         material
-                         hc-zenburn
-                         anti-zenburn)
+                         spacemacs-dark
+                         spacemacs-light 
+                         )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -452,7 +465,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'vimish
+   dotspacemacs-folding-method 'evil
 
    ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
@@ -560,6 +573,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
+  (setq lexical-binding t)
   (setq spacemacs-evil-cursors '(("normal"       "#E5E9F0" box)
                                  ("insert"       "#E5E9F0" (bar . 2))
                                  ("emacs"        "#8FBCBB" box)
@@ -589,8 +603,8 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   ;; Enable propper folding
-  (evil-vimish-fold-mode t)
-  (evil-define-key 'normal 'global "zf" 'vimish-fold-toggle)
+  ;; (evil-vimish-fold-mode t)
+  ;; (evil-define-key 'normal 'global "zf" 'vimish-fold-toggle)
 
   ;; dont fuck with vim standards
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
@@ -599,7 +613,7 @@ you should place your code here."
 
   ;; Fixes undefined functions at startup
   ;; (require 'helm)
-  (require 'tramp)
+  ;; (require 'tramp)
 
   ;; Manual begin company auto-complete
   (define-key evil-insert-state-map (kbd "C-<SPC>") 'company-manual-begin)
@@ -614,12 +628,12 @@ you should place your code here."
   ;; (evil-define-key 'flyspell-mode 'global "C-k" 'popup-previous)
 
   ;; Fix popup bug where it insert '^K' https://github.com/syl20bnr/spacemacs/issues/2974
-  (add-hook
-   'company-completion-started-hook
-   (lambda (&rest ignore)
-     (when evil-mode
-       (when (evil-insert-state-p)
-         (define-key evil-insert-state-map (kbd "C-k") nil)))))
+  ;; (add-hook
+  ;;  'company-completion-started-hook
+  ;;  (lambda (&rest ignore)
+  ;;    (when evil-mode
+  ;;      (when (evil-insert-state-p)
+  ;;        (define-key evil-insert-state-map (kbd "C-k") nil)))))
 
   ;; Delete marked region if any key preessed, fx replace marked text on paste
   (delete-selection-mode t)
@@ -670,12 +684,12 @@ you should place your code here."
         '(24-hours ":" minutes))
 
   ;; Less fancy powerline
-  (setq powerline-default-separator 'nil)
+  ;; (setq powerline-default-separator 'nil)
 
 
   ;; JS and JSON
-  (setq-default js2-basic-offset 2)
-  (setq-default js-indent-level 2)
+  ;; (setq-default js2-basic-offset 2)
+  ;; (setq-default js-indent-level 2)
 
 
 
