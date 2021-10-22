@@ -247,7 +247,7 @@ for_window [class="matplotlib"] floating enable
 for_window [class="Toplevel"] floating enable border normal
 
 for_window [class="feh"] floating enable
-
+for_window [class="Mathpix Snipping Tool"] floating enable
 for_window [title="Minecraft Launcher"] floating enable
 
 # switch to workspace with urgent window automatically
@@ -260,6 +260,7 @@ for_window [class="Emacs"] move container to workspace $ws2
 for_window [class="Slack"] move container to workspace $ws7
 for_window [class="Spotify"] move container to workspace $ws8
 for_window [class="Code"] move container to workspace $ws2
+for_window [class="Chromium"] move container to workspace $ws1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

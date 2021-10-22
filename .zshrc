@@ -79,6 +79,8 @@ plugins=(
   emacs # Emacs daemon capability: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/emacs
   yarn # autocompletion for yarn: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/yarn
   # archlinux # a bunch of aliases
+  stack # Provides completion for Stack. (haskell)
+
 )
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
@@ -90,7 +92,7 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-# source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
+source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 
 # python virtenvs
 export WORKON_HOME=$HOME/.virtualenvs
@@ -138,7 +140,8 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias update="yaourt -Syua"
+# alias update="yaourt -Syua"
+alias update="pamac upgrade -a"
 alias convert_jupyter_to_python="ipython nbconvert --to=python"
 
 
@@ -165,4 +168,6 @@ alias convert_jupyter_to_python="ipython nbconvert --to=python"
 # zle -N zle-keymap-select
 
 # opam configuration
-test -r /home/bonqus/.opam/opam-init/init.zsh && . /home/bonqus/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# test -r /home/bonqus/.opam/opam-init/init.zsh && . /home/bonqus/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+source <(cod init $$ zsh)
