@@ -37,6 +37,7 @@ This function should only modify configuration layer settings."
              erlang-backend 'lsp)
      sql
      (haskell :variables
+              haskell-process-type 'stack-ghci
               haskell-enable-hindent t
               haskell-enable-hindent-style "johan-tibell")
      yaml
@@ -73,12 +74,14 @@ This function should only modify configuration layer settings."
      ;; org
      (org :variables
           org-list-allow-alphabetical t
+          org-enable-reveal-js-support t
+          org-re-reveal-root "file:///home/bonqus/Devel/reveal.js/"
           )
          ;; org-enable-github-support t
          ;; org-enable-reveal-js-support t)
      (python :variables
-             python-indent-offset 4
-             python-tab-width 4
+             python-indent-offset 2
+             python-tab-width 2
              python-formatter 'yapf
              python-enable-yapf-format-on-save nil
              python-sort-imports-on-save t
@@ -773,6 +776,13 @@ you should place your code here."
   (openwith-mode t)
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
 
+  ;; open org mode specific page links
+  (setq org-file-apps
+        '((auto-mode . emacs)
+          ("\\.pdf::\\([0-9]+\\)?\\'" . "zathura %s -P %1")
+          ("\\.pdf\\'" . "zathura %s")
+          (directory . emacs)))
+
   ;; Debug lsp
   ;; (setq lsp-log-io t)
 
@@ -880,6 +890,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(evil-want-Y-yank-to-eol nil)
+ '(org-agenda-files '("~/Datalogi/ML/notes.org"))
  '(org-format-latex-options
    '(:foreground default :background default :scale 2.0 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
