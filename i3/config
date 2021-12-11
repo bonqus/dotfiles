@@ -72,7 +72,8 @@ bindsym XF86AudioMute exec        "amixer set Master toggle"
 # bindsym XF86AudioMicLowerVolume exec "amixer -q sset Capture 5%+"
 bindsym XF86AudioMicMute exec "amixer set Capture toggle"
 
-bindsym XF86Display exec "arandr"
+# bindsym XF86Display exec "arandr"
+bindsym XF86Display exec "onefullhdscreen"
 
 bindsym XF86Tools exec ""
 
