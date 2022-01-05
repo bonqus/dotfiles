@@ -80,8 +80,8 @@ This function should only modify configuration layer settings."
          ;; org-enable-github-support t
          ;; org-enable-reveal-js-support t)
      (python :variables
-             python-indent-offset 2
-             python-tab-width 2
+             python-indent-offset 4
+             python-tab-width 4
              python-formatter 'yapf
              python-enable-yapf-format-on-save nil
              python-sort-imports-on-save t
@@ -858,6 +858,7 @@ you should place your code here."
                         (delete-windows-on buf))
                       buffer)))
   (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -877,11 +878,6 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -901,5 +897,4 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
 )
