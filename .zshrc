@@ -138,8 +138,24 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias update="yaourt -Syua"
+alias update="pamac upgrade -a"
 alias convert_jupyter_to_python="ipython nbconvert --to=python"
+
+# git checkout -b bonqus/ch14692/workouts-update-hints-cover-photo-section origin/master     
+# alias gcbm='git checkout -b $() origin/master'
+# alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
+
+# Can't be asked to write that shit out everytime
+function gcbm() {
+    git checkout -b $1 origin/master
+}
+
+function gbls() {
+    search=$1
+    search="bonqus/*/*${search}*"
+    git branch --list ${search}
+}
+
 
 
 # KEYTIMEOUT=1
@@ -166,3 +182,16 @@ alias convert_jupyter_to_python="ipython nbconvert --to=python"
 
 # opam configuration
 test -r /home/bonqus/.opam/opam-init/init.zsh && . /home/bonqus/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+
+# Android
+export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin/
+export PATH=$PATH:/opt/android-sdk/emulator/
+export PATH=$PATH:/opt/android-sdk/platform-tools/
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+
+# Phrase
+export PHRASE_ACCESS_TOKEN=8f12032de391360f576d4c6f2a4b3cf7d692cbf830598ccabd4cf5f29cdeb413
+
