@@ -333,7 +333,8 @@ exec --no-startup-id xautolock -time 10 -locker blurlock
 # exec --no-startup-id xfce4-panel --disable-wm-check
 exec --no-startup-id xset b off 
 
-exec --no-startup-id fluxgui
+# exec --no-startup-id fluxgui
+exec --no-startup-id redshift-gtk
 
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
