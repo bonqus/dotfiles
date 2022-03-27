@@ -113,6 +113,7 @@ bindkey '^J' history-substring-search-down
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^l' autosuggest-accept
+bindkey "^X^E" edit-command-line
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
