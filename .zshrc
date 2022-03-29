@@ -188,10 +188,12 @@ test -r /home/bonqus/.opam/opam-init/init.zsh && . /home/bonqus/.opam/opam-init/
 export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin/
 export PATH=$PATH:/opt/android-sdk/emulator/
 export PATH=$PATH:/opt/android-sdk/platform-tools/
-export VOLTA_HOME="$HOME/.volta"
+# export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 
 # Phrase
 export PHRASE_ACCESS_TOKEN=8f12032de391360f576d4c6f2a4b3cf7d692cbf830598ccabd4cf5f29cdeb413
 
+# edit command line in vim
+bindkey '^x^e' edit-command-line

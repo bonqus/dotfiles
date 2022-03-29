@@ -33,15 +33,18 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     haskell
+     ;; haskell
      yaml
-     asm
+     ;; asm
      bibtex
      colors
      cscope
      csv
      dap
-     django
+     graphql
+     json
+     prettier
+     ;; django
      emacs-lisp
      ;; erc
      ;; evil-cleverparens
@@ -49,15 +52,11 @@ This function should only modify configuration layer settings."
      helm
      html
      imenu-list ;; Outline
-     java
-     slack
-     (javascript :variables
-                 javascript-backend 'tide
-                 javascript-fmt-tool 'prettier
-                 node-add-modules-path t)
+     ;; java
+     ;; slack
      lua
-     (lsp :variables
-          lsp-ui-flycheck-enable nil)
+     ;; (lsp :variables
+     ;;      lsp-ui-flycheck-enable nil)
      markdown
      multiple-cursors
      org
@@ -79,9 +78,13 @@ This function should only modify configuration layer settings."
      syntax-checking
      systemd
      react
+     (javascript :variables
+                 javascript-backend 'tide
+                 javascript-fmt-tool 'prettier
+                 node-add-modules-path t)
      (typescript :variables
-                 typescript-backend 'lsp
-                 typescript-lsp-linter nil
+                 javascript-backend 'tide
+                 typescript-fmt-tool 'prettier
                  typescript-linter 'eslint)
      ;; themes-megapack
      version-control
@@ -107,13 +110,13 @@ This function should only modify configuration layer settings."
                        auto-completion-private-snippets-directory nil)
 
 
-     (c-c++ :variables
-            c-c++-enable-google-style t
-            c-c++-enable-auto-newline t
-            c-c++-enable-google-newline t
-            c-c++-lsp-enable-semantic-highlight 'rainbow
-            c-c++-lsp-semantic-highlight-method 'overlay
-            c-c++-enable-clang-support t)
+     ;; (c-c++ :variables
+     ;;        c-c++-enable-google-style t
+     ;;        c-c++-enable-auto-newline t
+     ;;        c-c++-enable-google-newline t
+     ;;        c-c++-lsp-enable-semantic-highlight 'rainbow
+     ;;        c-c++-lsp-semantic-highlight-method 'overlay
+     ;;        c-c++-enable-clang-support t)
 
      (spell-checking :variables
                      spell-checking-enable-auto-dictionary t
@@ -792,6 +795,7 @@ you should place your code here."
   ;; Enable flycheck by default
   (add-hook 'LaTeX-mode-hook #'outline-minor-mode)
 
+
   ;; Fix flycheck in typescript, html and javascript blocks in vue-mode.
   ;; (with-eval-after-load 'lsp-mode
   ;;   '(with-eval-after-load  'flycheck
@@ -814,6 +818,56 @@ you should place your code here."
                         (delete-windows-on buf))
                       buffer)))
   (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
+
+
+
+
+ ;; ...
+ ;; tide def func:
+ (defun tide-setup-hook ()
+    (tide-setup)
+    (eldoc-mode)
+    (tide-hl-identifier-mode +1)
+    (setq web-mode-enable-auto-quoting nil)
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-attr-indent-offset 2)
+    (setq web-mode-attr-value-indent-offset 2)
+    (setq lsp-eslint-server-command '("node" (concat (getenv "HOME") "/var/src/vscode-eslint/server/out/eslintServer.js") "--stdio"))
+    (set (make-local-variable 'company-backends)
+         '((company-tide company-files :with company-yasnippet)
+           (company-dabbrev-code company-dabbrev))))
+
+;; hooks
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+
+;; use rjsx-mode for .js* files except json and use tide with rjsx
+(add-to-list 'auto-mode-alist '("\\.js.*$" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+(add-hook 'rjsx-mode-hook 'tide-setup-hook)
+
+
+;; web-mode extra config
+(add-hook 'web-mode-hook 'tide-setup-hook
+          (lambda () (pcase (file-name-extension buffer-file-name)
+                  ("tsx" ('tide-setup-hook))
+                  (_ (my-web-mode-hook)))))
+;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+(add-hook 'web-mode-hook 'company-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
+
+;; yasnippet
+(yas-global-mode 1)
+
+;; flycheck
+;; (global-flycheck-mode)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; company-mode
+(global-company-mode)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
