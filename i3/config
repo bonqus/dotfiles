@@ -36,6 +36,8 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+o exec --no-startup-id rofi -modi emoji -show emoji 
+bindsym $mod+c exec --no-startup-id rofi -show calc -modi calc
 
 # start passmenu
 bindsym $mod+p exec --no-startup-id passmenu --type
@@ -73,7 +75,7 @@ bindsym XF86AudioMute exec        "amixer set Master toggle"
 bindsym XF86AudioMicMute exec "amixer set Capture toggle"
 
 # bindsym XF86Display exec "arandr"
-bindsym XF86Display exec "onefullhdscreen"
+bindsym XF86Display exec "work"
 
 bindsym XF86Tools exec ""
 
@@ -240,7 +242,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [title="\(\~\/\.cache\/luakit\)"] floating enable
-for_window [title="^Android Emulator -"] floating enable
+for_window [title="^Android Emulator.+:[0-9]+$"] floating enable
 
 # Python imshows
 for_window [class="Matplotlib"] floating enable
@@ -321,10 +323,10 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id unclutter
 #exec --no-startup-id manjaro-hello
-# exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id pamac-tray
-# exec --no-startup-id clipit
+exec --no-startup-id clipit
 exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky
@@ -334,7 +336,8 @@ exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id xset b off 
 
 # exec --no-startup-id fluxgui
-exec --no-startup-id redshift-gtk
+# exec --no-startup-id redshift-gtk
+exec --no-startup-id rise
 
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor

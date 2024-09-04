@@ -80,7 +80,6 @@ plugins=(
   yarn # autocompletion for yarn: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/yarn
   # archlinux # a bunch of aliases
   stack # Provides completion for Stack. (haskell)
-
 )
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
@@ -95,9 +94,10 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 
 # python virtenvs
-export WORKON_HOME=$HOME/.virtualenvs
+# export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source /bin/virtualenvwrapper.sh
+export LENUS_HOME=$HOME/Devel/lenus
+# source /bin/virtualenvwrapper.sh
 
 # User configuration
 
@@ -143,8 +143,10 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias update="yaourt -Syua"
 alias update="pamac upgrade -a"
+alias pacman-install="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias pacman-remove="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias convert_jupyter_to_python="ipython nbconvert --to=python"
-
+alias update-env='eval $(op signin) && op read op://"Product - Engineering"/"Web App .env file"/notesPlain > $LENUS_HOME/.env && echo "PRE_COMMIT_HOOKS=prettier\nPRE_PUSH_HOOKS=lint" >> $LENUS_HOME/.env'
 
 # KEYTIMEOUT=1
 # function zle-line-init zle-keymap-select {
@@ -171,4 +173,11 @@ alias convert_jupyter_to_python="ipython nbconvert --to=python"
 # opam configuration
 # test -r /home/bonqus/.opam/opam-init/init.zsh && . /home/bonqus/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-source <(cod init $$ zsh)
+# Maybe enable ?
+# source <(cod init $$ zsh)
+#!
+source /usr/share/nvm/init-nvm.sh
+
+# FZF Keybindings fuzzy search
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
